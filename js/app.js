@@ -15,10 +15,13 @@ function app(){
         {url: "./bower_components/react/react.min.js"},
         {url: "./node_modules/jsnox/index.js"},
         {url: "./bower_components/pace/pace.min.js"},
-        {url: "./js/TemplateView.js"}
+        {url: "./js/TemplateView.js"},
+        {url: "./js/todo.js"}
     ).then(function(){
         document.querySelector("html").style.opacity = 1;
         // start app?
-    })
+
+        window.router = new Backbone.TodoRouter();
+    });
 
 }

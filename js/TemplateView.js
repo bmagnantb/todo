@@ -21,9 +21,8 @@
         },
         initialize: function(options) {
             this.options = options;
-
             this.model && this.model.on("change", this.render.bind(this));
-            this.collection && this.collection.on("add reset remove", this.render.bind(this));
+            this.collection && this.collection.on("add reset remove sort", this.render.bind(this));
         },
         render: function() {
             var self = this;
@@ -32,8 +31,8 @@
                 d && (self.el.innerHTML = fn({
                     data: d.toJSON()
                 }));
-            })
+            });
         }
-    })
+    });
 
 })();

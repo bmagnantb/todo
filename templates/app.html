@@ -1,0 +1,16 @@
+<form class="add">
+    <input type="text">
+    <button>+</button>
+</form>
+
+<div class="list">
+    <ul>
+        <% _.forEach(data, function(val){ %>
+            <li>
+                <input type="checkbox" id="<%= val.title %>" <%= val.completed ? 'checked' : null %>>
+                <label for="<%= val.title %>"></label>
+                <a href="#item/<%= val.title %>"><span><%= val.title %></span></a>
+            </li>
+            <% }) %>
+    </ul>
+</div>
