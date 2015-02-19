@@ -40,9 +40,6 @@
     Backbone.ItemView = Backbone.TemplateView.extend({
         view: 'item',
         el: '.itemcontainer',
-        renderDetails: function(e) {
-            console.log(e);
-        },
         events: {
         	"click .close": "close"
         },

@@ -882,7 +882,8 @@ img {
 body {
   -webkit-transition: opacity .25s ease;
           transition: opacity .25s ease;
-  font-family: Lato; }
+  font-family: Lato;
+  font-weight: 100; }
 
 main {
   max-width: 50em;
@@ -906,7 +907,6 @@ main {
     right: 1.5rem;
     background-color: #fff;
     font-size: 2em;
-    font-weight: 100;
     border: 0; }
 
 .list {
@@ -923,8 +923,7 @@ main {
         text-decoration: none;
         color: inherit; }
       .list ul li span {
-        font-size: 2em;
-        font-weight: 100; }
+        font-size: 2em; }
       .list ul li input[type="checkbox"] {
         display: none; }
       .list ul li input[type="checkbox"] + label {
@@ -980,11 +979,10 @@ main {
   position: absolute;
   top: 0;
   right: 0;
-  border-left: 1px solid #ccc;
-  border-bottom: 1px solid #ccc;
   width: 1.6em;
   height: 1.6em;
-  cursor: pointer; }
+  cursor: pointer;
+  font-size: 1.5em; }
 
 .fade {
   opacity: .5;
