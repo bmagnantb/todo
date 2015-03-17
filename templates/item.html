@@ -1,2 +1,6 @@
-<div class="close">X</div>
-<h1><%= data.title %></h1>
+<div class="options">
+<% console.log(!data.editable) %>
+<a href="#item/<%= data.title %><%= (!data.editable) ? '/edit' : '' %>"><div class="edit"></div></a>
+<a href="#"><div class="close">X</div></a>
+</div>
+<h1<%= (data.editable) ? ' contenteditable' : '' %>><%= data.title %></h1>

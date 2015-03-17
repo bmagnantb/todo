@@ -973,16 +973,43 @@ main {
   text-align: center;
   background: #fff;
   position: relative;
-  display: none; }
+  display: none;
+  padding-top: 2.5em; }
+  .itemcontainer h1 {
+    font-size: 3.5rem;
+    font-weight: 100; }
+  .itemcontainer input {
+    margin: 0 auto;
+    font-size: 3em; }
 
-.close {
+.options {
   position: absolute;
   top: 0;
   right: 0;
+  font-size: 1.5em; }
+  .options > * {
+    display: inline-block; }
+  .options a {
+    text-decoration: none;
+    color: inherit; }
+
+.edit {
+  margin-right: .5em;
+  width: 1em;
+  height: 1em;
+  vertical-align: top; }
+  .edit:before {
+    content: "";
+    -webkit-transform: rotateZ(40deg);
+            transform: rotateZ(40deg);
+    border-right: 1px solid #333;
+    -webkit-transform: rotateZ(45deg);
+            transform: rotateZ(45deg); }
+
+.close {
   width: 1.6em;
   height: 1.6em;
-  cursor: pointer;
-  font-size: 1.5em; }
+  cursor: pointer; }
 
 .fade {
   opacity: .5;

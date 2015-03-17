@@ -2,6 +2,9 @@
 
     "use strict";
 
+    var Backbone = require('backbone')
+
+
     Backbone.TemplateView = Backbone.View.extend({
         cache: {},
         stream: function(url) {

@@ -1,6 +1,8 @@
 ;
 (function(exports) {
 
+		var Backbone = require('backbone')
+
     Backbone.TodoRouter = Backbone.Router.extend({
         initialize: function() {
             this.collection = new Backbone.TodoList([{
@@ -8,45 +10,62 @@
             }, {
                 title: 'Groceries'
             }]);
-            this.view = new Backbone.TodoView({
-                collection: this.collection
-            });
-            Backbone.history.start();
+            // this.view = new Backbone.TodoView({
+            //     collection: this.collection
+            // });
         },
 
         routes: {
             'item/:id': 'itemDetails',
+            'item/:id/edit': 'edit',
             '*default': 'home'
         },
 
         home: function() {
-        		this.view.$el.removeClass('fade');
-        		this.collection.models.forEach(function(val){
-        			val.view.$el.removeClass('show');
-        		})
-            this.view.render();
+        		// this.view.$el.removeClass('fade');
+        		// this.collection.models.forEach(function(val){
+        		// 	val.view.$el.removeClass('show');
+        		// })
+          //   this.view.render();
         },
 
         itemDetails: function(id) {
-        		this.view.$el.addClass('fade');
-            var detailView = this.collection.filter(function(val) {
+        		// this.view.$el.addClass('fade');
+            var item = this.collection.filter(function(val) {
                 return id === val.get('title');
             })[0];
-            detailView.view.$el.addClass('show');
-            detailView.view.render();
+            // item.view.$el.addClass('show');
+            item.set('editable', false)
+            // item.view.render();
+            return item
+        },
+
+        edit: function(id) {
+        	// this.view.$el.addClass('fade');
+        	var item = this.collection.filter(function(val) {
+        		return id === val.get('title');
+        	})[0];
+        	// item.view.$el.addClass('show');
+        	item.set('editable', true);
+        	// item.view.render();
+        	return item
         }
     });
 
     Backbone.ItemView = Backbone.TemplateView.extend({
-        view: 'item',
-        el: '.itemcontainer',
-        events: {
-        	"click .close": "close"
-        },
-        close: function() {
-        	router.navigate('', {trigger: true, replace: false});
-        }
+        view: 'item'
+        // el: '.itemcontainer'
     });
+
+    Backbone.EditView = Backbone.TemplateView.extend({
+    	view: 'edit',
+    	// el: '.itemcontainer',
+    	events: {
+    	},
+    	edit: function(e) {
+
+    	}
+    })
 
     Backbone.TodoItem = Backbone.Model.extend({
         defaults: {
@@ -58,18 +77,22 @@
             id: Date.now()
         },
         initialize: function() {
-            this.view = new Backbone.ItemView({
-                model: this
-            });
+            // this.view = new Backbone.ItemView({
+            //     model: this
+            // });
+            // this.editView = new Backbone.EditView({
+            // 	model: this
+            // });
         }
     });
 
     Backbone.TodoList = Backbone.Collection.extend({
         model: Backbone.TodoItem,
+
         comparator: function(m1, m2) {
             var value = 0;
-            (m1.get('dueDate') <= m2.get('dueDate')) ? value = -1: value = 1;
-            (m1.get('completed') !== m2.get('completed') && m1.get('completed') === true) ? value = 1: null;
+            (m1.get('dueDate') <= m2.get('dueDate')) ? value = -1 : value = 1;
+            (m1.get('completed') !== m2.get('completed') && m1.get('completed') === true) ? value = 1 : null;
             return value;
         }
     });
@@ -91,13 +114,22 @@
         },
 
         complete: function(e) {
-            var item = this.collection.filter(function(val) {
-                return e.target.id === (val.get('title'));
-            });
-            item[0].set('completed', !item[0].get('completed'), {
+        		var item = this.filter(e.target.id)
+            // var item = this.collection.filter(function(val) {
+            //     return e.target.id === (val.get('title'));
+            // })[0];
+            // item.set('completed', !item.get('completed'), {
                 silent: true
             });
             this.collection.sort();
+        },
+
+        filter: function(itemID) {
+        		var item = this.collection.filter(function(val) {
+        				return itemID === val.get('title')
+        		})[0];
+
+        		return item
         }
     });
 
